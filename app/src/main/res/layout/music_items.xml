@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#2C302D"
+    android:background="#2196F3"
     android:layout_marginTop="5dp"
     android:id="@+id/audio_item">
 
@@ -10,8 +10,8 @@
         android:id="@+id/music_img"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:src="@mipmap/ic_launcher_round"
-        android:padding="5dp" />
+        android:padding="5dp"
+        android:src="@mipmap/ic_launcher_round" />
 
     <TextView
         android:id="@+id/music_file_name"

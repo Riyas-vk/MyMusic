@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,6 +31,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder
 
     private Context mContext;
     private ArrayList<MusicFiles> mFiles;
+
 
     MusicAdapter(Context mContext,ArrayList<MusicFiles> mFiles){
         this.mContext = mContext;
@@ -53,6 +55,15 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder
         else {
             Glide.with(mContext).asBitmap().load(R.drawable.ic_launcher_foreground).into(holder.album_art);
         }
+
+        String str=mFiles.get(position).getTitle();
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Toast.makeText(mContext, str, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

@@ -39,18 +39,20 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         permission();// added1
     }
 
     private void permission() {
-        if(ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE)
+        if(ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(MainActivity.this,new String[]{
-                    Manifest.permission.READ_EXTERNAL_STORAGE},REQUEST_CODE);
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE},REQUEST_CODE);
         }
         else
         {
             musicFiles = getAllAudio(this);
+
             initViewPager();
         }
     }
@@ -66,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
             }
             else{
                 ActivityCompat.requestPermissions(MainActivity.this,new String[]{
-                        Manifest.permission.READ_EXTERNAL_STORAGE},REQUEST_CODE);
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE},REQUEST_CODE);
             }
         }
     }
@@ -89,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
             super(fm);
             this.fragments= new ArrayList<>();
             this.titles= new ArrayList<>();
+
         }
 
         void addFragments(Fragment fragment,String title){
@@ -126,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
                 MediaStore.Audio.Media.DATA,
                 MediaStore.Audio.Media.ARTIST,
         };
+
 
         Cursor cursor= context.getContentResolver().query(uri,projections,null,null, null);
         if(cursor!=null){
