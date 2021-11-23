@@ -39,8 +39,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        permission();
+        SongsFragment songFrag = new SongsFragment();
+        NowPlayingFragment nowPlayFrag = new NowPlayingFragment();
 
-        permission();// added1
+        songFrag.setSend(nowPlayFrag.getSend());
     }
 
     private void permission() {

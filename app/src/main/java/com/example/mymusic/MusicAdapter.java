@@ -19,6 +19,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -31,22 +35,29 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder
 
     private Context mContext;
     private ArrayList<MusicFiles> mFiles;
+    iClick send;
 
 
-    MusicAdapter(Context mContext,ArrayList<MusicFiles> mFiles){
+    MusicAdapter(Context mContext, ArrayList<MusicFiles> mFiles,iClick send){
         this.mContext = mContext;
         this.mFiles = mFiles;
+        this.send= send;
+
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.music_items,parent,false);
-        return new MyViewHolder(view);
+//        return new MyViewHolder(view);
+        MyViewHolder holder = new MyViewHolder(view);
+        return holder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        MusicFiles model = mFiles.get(position);
+        holder.file_name.setText(model.getTitle());
         holder.file_name.setText(mFiles.get(position).getTitle());
         byte[] image = getAlbumArt(mFiles.get(position).getPath());
         if(image != null){
@@ -55,15 +66,14 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder
         else {
             Glide.with(mContext).asBitmap().load(R.drawable.ic_launcher_foreground).into(holder.album_art);
         }
-
-        String str=mFiles.get(position).getTitle();
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.file_name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Toast.makeText(mContext, str, Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, model.getTitle(), Toast.LENGTH_SHORT).show();
+                send.sendData(model.getTitle());
             }
         });
+
     }
 
     @Override
@@ -87,4 +97,5 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder
         retriever.release();
         return art;
     }
+
 }
