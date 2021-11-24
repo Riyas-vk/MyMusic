@@ -20,7 +20,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 public class NowPlayingFragment extends Fragment {
-    TextView text1;
+   static TextView text1;
     View v;
 
 
@@ -49,7 +49,10 @@ public class NowPlayingFragment extends Fragment {
     }
 
     public void updateEditText(String newText) {
-        //text1.setText(newText);
+        text1.setText(newText);
         System.out.println(newText);
     }
+
+
+
 }
