@@ -31,19 +31,23 @@ import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements  InterfaceClick{
 
     public static final int REQUEST_CODE = 1;
     static ArrayList<MusicFiles> musicFiles;
+    SongsFragment songFrag;
+    NowPlayingFragment nowPlayFrag;
+    ViewPager viewPager;
+    TabLayout tabLayout;
+    ViewPagerAdapter viewPagerAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         permission();
-        SongsFragment songFrag = new SongsFragment();
-        NowPlayingFragment nowPlayFrag = new NowPlayingFragment();
+        songFrag = new SongsFragment();
+        nowPlayFrag = new NowPlayingFragment();
 
-        songFrag.setSend(nowPlayFrag.getSend());
     }
 
     private void permission() {
@@ -77,13 +81,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initViewPager() {
-        ViewPager viewPager= findViewById(R.id.viewpager);
-        TabLayout tabLayout= findViewById(R.id.tab_layout);
-        ViewPagerAdapter viewPagerAdapter= new ViewPagerAdapter(getSupportFragmentManager());
+        viewPager= findViewById(R.id.viewpager);
+        tabLayout= findViewById(R.id.tab_layout);
+        viewPagerAdapter= new ViewPagerAdapter(getSupportFragmentManager());
         viewPagerAdapter.addFragments(new NowPlayingFragment(),"Now playing");
         viewPagerAdapter.addFragments(new SongsFragment(),"Song List");
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
+    }
+
+    @Override
+    public void clikFunction(String text) {
+        viewPager.setCurrentItem(0);
+        nowPlayFrag.updateEditText(text);
     }
 
     public static class ViewPagerAdapter extends FragmentPagerAdapter {

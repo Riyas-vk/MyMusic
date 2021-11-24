@@ -19,8 +19,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class NowPlayingFragment extends Fragment implements iClick{
-    TextView textView;
+public class NowPlayingFragment extends Fragment {
+    TextView text1;
+    View v;
 
 
     public NowPlayingFragment() {
@@ -30,31 +31,25 @@ public class NowPlayingFragment extends Fragment implements iClick{
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        textView=view.findViewById(R.id.text0);
+        text1=view.findViewById(R.id.text);
     }
-
-    public iClick getSend() {
-        return send;
-    }
-
-    iClick send=this;
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
+
+    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_now_playing, container, false);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        v = inflater.inflate(R.layout.fragment_now_playing, container, false);
+        text1=v.findViewById(R.id.text);
+        return v;
     }
 
-    @Override
-    public void sendData(String text) {
-        textView.setText(text);
+    public void updateEditText(String newText) {
+        //text1.setText(newText);
+        System.out.println(newText);
     }
 }
