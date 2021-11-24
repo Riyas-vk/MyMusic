@@ -59,7 +59,9 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         MusicFiles model = mFiles.get(position);
         holder.file_name.setText(model.getTitle());
+
         holder.file_name.setText(mFiles.get(position).getTitle());
+
         byte[] image = getAlbumArt(mFiles.get(position).getPath());
         if(image != null){
             Glide.with(mContext).asBitmap().load(image).into(holder.album_art);
@@ -71,8 +73,8 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, model.getTitle(), Toast.LENGTH_SHORT).show();
-                listener.clikFunction(model.getTitle());
+              //  Toast.makeText(mContext, model.getTitle(), Toast.LENGTH_SHORT).show();
+                listener.clickFunction(model.getTitle(), model.getAlbum(), model.getArtist());
             }
         });
 

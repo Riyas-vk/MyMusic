@@ -1,5 +1,5 @@
 package com.example.mymusic;
 
 public interface InterfaceClick {
-    void clikFunction (String text);
+    void clickFunction (String text1,String text2,String text3);
 }
