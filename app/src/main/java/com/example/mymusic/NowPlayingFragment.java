@@ -26,10 +26,13 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.io.IOException;
+
 public class NowPlayingFragment extends Fragment {
    static TextView title1,album1,artist1;
    static ImageView imageView;
     View v;
+    static MediaPlayer mediaPlayer;
 
 
     public NowPlayingFragment() {
@@ -62,10 +65,36 @@ public class NowPlayingFragment extends Fragment {
         return v;
     }
 
-    public void updateEditText(String title,String album,String artist) {
+    public void updateEditText(String title,String album,String artist , String path) {
         title1.setText("TITLE: "+title);
         album1.setText("ALBUM: "+album);
         artist1.setText("ARTIST: "+artist);
+        mediaPlayer=new MediaPlayer();
+        try {
+            mediaPlayer.setDataSource(path);
+        } catch (IllegalArgumentException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IllegalStateException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        try {
+            mediaPlayer.prepare();
+        } catch (IllegalStateException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        mediaPlayer.start();
+        if(mediaPlayer.isPlaying()) {
+            System.out.println("playing");
+        }
         //System.out.println(album);
     }
 }

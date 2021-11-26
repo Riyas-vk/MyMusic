@@ -74,7 +74,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder
             @Override
             public void onClick(View v) {
               //  Toast.makeText(mContext, model.getTitle(), Toast.LENGTH_SHORT).show();
-                listener.clickFunction(model.getTitle(), model.getAlbum(), model.getArtist());
+                listener.clickFunction(model.getTitle(), model.getAlbum(), model.getArtist(), model.getPath());
             }
         });
 

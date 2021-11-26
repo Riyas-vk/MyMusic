@@ -91,9 +91,9 @@ public class MainActivity extends AppCompatActivity implements  InterfaceClick{
     }
 
     @Override
-    public void clickFunction(String text1,String text2, String text3) {
+    public void clickFunction(String text1,String text2, String text3,String path) {
         viewPager.setCurrentItem(0);
-        nowPlayFrag.updateEditText(text1,text2,text3);
+        nowPlayFrag.updateEditText(text1,text2,text3,path);
     }
 
     public static class ViewPagerAdapter extends FragmentPagerAdapter {
